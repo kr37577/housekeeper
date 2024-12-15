@@ -1,4 +1,6 @@
-from flask import request, render_template
+from flask import Flask, request, render_template
+
+app = Flask(__name__)
 import sqlite3
 import pandas as pd
 from datetime import datetime, timedelta
