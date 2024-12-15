@@ -21,6 +21,7 @@ def test_analysis_basic(client):
     assert analysis_res.status_code == 200
 
     # 当月合計 = 食費(1000+500) + 娯楽費(2000) = 3500円
+    
     assert '当月合計: 3500 円' in html
     # カテゴリ別合計: 食費(1500), 娯楽費(2000)
     assert '食費: 1500 円' in html
