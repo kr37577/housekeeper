@@ -1,7 +1,7 @@
 import os
 import tempfile
 import pytest
-from app import app, init_db, DB_PATH
+from app.app import app, init_db, DB_PATH
 import sqlite3
 
 @pytest.fixture
@@ -20,7 +20,7 @@ def app_fixture():
 
     # 簡易例として、もしapp.py内でDB_PATHをグローバル変数として参照しているなら、
     # import app後にapp.DB_PATH = ":memory:"とすることで書き換えられる:
-    import app as app_module
+    import app.app as app_module
     app_module.DB_PATH = ":memory:"
 
     # DB初期化
