@@ -28,6 +28,7 @@
       <td colspan="6">該当データなし</td>
     </tr>
     {% else %} {% for exp in expenses %}
+    <!-- ID・日付・カテゴリを一行にまとめる -->
     <tr>
       <td>{{ exp.id }}</td>
       <td>{{ exp.date }}</td>
