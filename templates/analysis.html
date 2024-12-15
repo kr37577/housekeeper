@@ -1,0 +1,55 @@
+{% extends "base.html" %} {% block content %}
+<h2>{{ current_month }} 分析結果</h2>
+<p>
+  当月の支出状況を表示します。別の月を指定する場合はYYYY-MM形式で入力後「分析更新」を押してください。
+</p>
+
+<form action="{{ url_for('analysis') }}" method="post" class="row g-3 mb-3">
+  <div class="col-md-3">
+    <label for="year_month" class="form-label">対象年月(YYYY-MM)</label>
+    <input
+      type="text"
+      class="form-control"
+      id="year_month"
+      name="year_month"
+      placeholder="例: 2024-12"
+    />
+  </div>
+  <div class="col-md-3 mt-4">
+    <button type="submit" class="btn btn-secondary mt-2">分析更新</button>
+  </div>
+</form>
+
+<div class="mb-3">
+  <h4>当月合計: {{ current_total }} 円</h4>
+</div>
+
+<div class="mb-3">
+  <h4>カテゴリ別合計:</h4>
+  {% if category_sum.empty %} データなし {% else %}
+  <ul>
+    {% for cat, amt in category_sum.items() %}
+    <li>{{ cat }}: {{ amt }} 円</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+</div>
+
+<div class="mb-3">
+  {% if diff_rate is not none %}
+  <h4>前月({{ last_month }})比: {{ diff_rate|round(2) }}%</h4>
+  {% else %}
+  <h4>前月({{ last_month }})データがないため比較不可</h4>
+  {% endif %}
+</div>
+
+{% if category_pie_path %}
+<div class="mb-3">
+  <h4>カテゴリ比率グラフ:</h4>
+  <img
+    src="{{ category_pie_path }}"
+    alt="カテゴリ比率グラフ"
+    style="max-width: 300px"
+  />
+</div>
+{% endif %} {% endblock %}

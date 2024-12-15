@@ -1,0 +1,58 @@
+{% extends "base.html" %} {% block content %}
+<h2>支出追加</h2>
+<p>
+  ここで日々の支出を記録できます。正しい日付とカテゴリ、金額を入力して「登録」ボタンを押してください。
+</p>
+
+<form action="{{ url_for('add_expense') }}" method="post" class="row g-3">
+  <div class="col-md-3">
+    <label for="date" class="form-label">日付</label>
+    <input
+      type="date"
+      class="form-control"
+      id="date"
+      name="date"
+      value="{{ today }}"
+    />
+    <small class="text-muted">例: {{ today }}</small>
+  </div>
+
+  <div class="col-md-3">
+    <label for="category" class="form-label">カテゴリ</label>
+    <select id="category" name="category" class="form-select">
+      {% for cat in categories %}
+      <option value="{{ cat }}">{{ cat }}</option>
+      {% endfor %}
+    </select>
+    <small class="text-muted">食費・交通費・娯楽費・雑費</small>
+  </div>
+
+  <div class="col-md-3">
+    <label for="amount" class="form-label">金額(円)</label>
+    <input
+      type="number"
+      class="form-control"
+      id="amount"
+      name="amount"
+      placeholder="例: 1000"
+      min="1"
+    />
+    <small class="text-muted">整数、1以上で入力</small>
+  </div>
+
+  <div class="col-md-3">
+    <label for="note" class="form-label">メモ（任意）</label>
+    <input
+      type="text"
+      class="form-control"
+      id="note"
+      name="note"
+      placeholder="例: コンビニランチ"
+    />
+  </div>
+
+  <div class="col-12 mt-3">
+    <button type="submit" class="btn btn-primary">登録</button>
+  </div>
+</form>
+{% endblock %}

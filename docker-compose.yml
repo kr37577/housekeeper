@@ -1,0 +1,13 @@
+version: '3'
+services:
+  household-app:
+    build: .
+    ports:
+      - "5001:5000"
+    volumes:
+      - ./db:/app/db
+      - ./static/images:/app/static/images
+    environment:
+      - FLASK_ENV=development
+      - FLASK_APP=app.py
+    command: flask run --host=0.0.0.0 --port=5000

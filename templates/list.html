@@ -1,0 +1,50 @@
+{% extends "base.html" %} {% block content %}
+<h2>支出一覧</h2>
+<p>登録した支出を日付やカテゴリで絞り込むことができます。</p>
+
+<form
+  action="{{ url_for('list_expenses') }}"
+  method="post"
+  class="row g-3 mb-3"
+>
+  <!-- フィルタフォームはそのまま -->
+  <!-- ... -->
+</form>
+
+<table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>日付</th>
+      <th>カテゴリ</th>
+      <th>金額</th>
+      <th>メモ</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% if expenses|length == 0 %}
+    <tr>
+      <td colspan="6">該当データなし</td>
+    </tr>
+    {% else %} {% for exp in expenses %}
+    <tr>
+      <td>{{ exp.id }}</td>
+      <td>{{ exp.date }}</td>
+      <td>{{ exp.category }}</td>
+      <td>{{ exp.amount }}</td>
+      <td>{{ exp.note }}</td>
+      <td>
+        <form
+          action="{{ url_for('delete_expense', id=exp.id) }}"
+          method="post"
+          style="display: inline"
+        >
+          <button type="submit" class="btn btn-danger btn-sm">削除</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %} {% endif %}
+  </tbody>
+</table>
+{% endblock %}
