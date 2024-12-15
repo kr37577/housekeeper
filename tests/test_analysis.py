@@ -17,6 +17,7 @@ def test_analysis_basic(client):
     # /analysisアクセス
     analysis_res = client.get('/analysis')
     html = analysis_res.data.decode('utf-8')
+    print(html)
     assert analysis_res.status_code == 200
 
     # 当月合計 = 食費(1000+500) + 娯楽費(2000) = 3500円
