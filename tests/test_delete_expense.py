@@ -18,7 +18,7 @@ def test_delete_expense_success(client):
     # 例: <td>1</td><td>2024-12-15</td><td>食費</td>...
     # といった形式でIDが表に出ていると仮定し、一番最初の一致を使う
     import re
-    match = re.search(r'<td>(\d+)</td><td>2024-12-15</td><td>食費</td>', html)
+    match = re.search(r'<td>(\d+)</td>\s*<td>2024-12-15</td>\s*<td>食費</td>', html, re.DOTALL)
     assert match is not None
     expense_id = match.group(1)
 
