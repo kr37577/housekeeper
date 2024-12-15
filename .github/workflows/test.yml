@@ -9,14 +9,22 @@ on:
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v2
+      - name: Check out code
+        uses: actions/checkout@v2
+
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
           python-version: "3.11"
+
       - name: Install dependencies
-        run: pip install --no-cache-dir -r requirements.txt
+        run: |
+          pip install --no-cache-dir -r requirements.txt
+
       - name: Run tests
-        run: pytest --cov=app
-        # working-directory: ./project_root (必要に応じて設定)
+        env:
+          PYTHONPATH: .
+        run: |
+          python -m pytest --cov=app
