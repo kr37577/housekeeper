@@ -1,7 +1,7 @@
 import os
 import tempfile
 import pytest
-from app import app, init_db, DB_PATH
+from app.app import app, init_db, DB_PATH
 import sqlite3
 
 @pytest.fixture
